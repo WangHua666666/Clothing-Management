@@ -22,7 +22,7 @@
 
 1. 克隆项目到本地：
 ```bash
-git clone [项目地址]
+git clone https://github.com/WangHua666666/Clothing-Management.git 
 cd clothing-management
 ```
 
