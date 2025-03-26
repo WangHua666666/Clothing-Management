@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服装出库 - 服装库存管理系统</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>服装出库</h1>
+        <form method="POST" class="form">
+            <div class="form-group">
+                <label for="clothing_id">选择服装：</label>
+                <select id="clothing_id" name="clothing_id" required>
+                    <!-- 这里将通过JavaScript动态填充服装列表 -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="quantity">出库数量：</label>
+                <input type="number" id="quantity" name="quantity" min="1" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="button">出库</button>
+                <a href="{{ url_for('index') }}" class="button">返回</a>
+            </div>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html> 
