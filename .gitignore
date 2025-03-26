@@ -16,15 +16,42 @@ ENV/
 # Database
 *.db
 *.sqlite3
+*.sqlite
 
 # Logs
 *.log
+logs/
+log/
 
 # Environment variables
 .env
 .env.*
+!.env.example
 
 # Distribution / packaging
 dist/
 build/
-*.egg-info/ 
+*.egg-info/
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+.nox/
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Project specific
+instance/
+.webassets-cache 
