@@ -39,32 +39,132 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="category" class="form-label">服装类别</label>
-                    <input type="text" class="form-control" id="category" name="category" required>
-                    <div class="invalid-feedback">请输入服装类别</div>
+                    <select class="form-select" id="category" name="category" required>
+                        <option value="">请选择类别</option>
+                        <option value="夹克">夹克</option>
+                        <option value="风衣">风衣</option>
+                        <option value="T恤">T恤</option>
+                        <option value="连衣裙">连衣裙</option>
+                        <option value="衬衫">衬衫</option>
+                        <option value="休闲裤">休闲裤</option>
+                        <option value="羽绒服">羽绒服</option>
+                        <option value="卫衣">卫衣</option>
+                        <option value="毛衣">毛衣</option>
+                        <option value="牛仔裤">牛仔裤</option>
+                        <option value="阔腿裤">阔腿裤</option>
+                        <option value="直筒裤">直筒裤</option>
+                        <option value="马甲">马甲</option>
+                        <option value="西装">西装</option>
+                        <option value="运动衫">运动衫</option>
+                        <option value="半身裙">半身裙</option>
+                        <option value="A字裙">A字裙</option>
+                        <option value="牛仔外套">牛仔外套</option>
+                        <option value="棉服">棉服</option>
+                        <option value="背心">背心</option>
+                        <option value="吊带">吊带</option>
+                        <option value="短裤">短裤</option>
+                        <option value="背带裤">背带裤</option>
+                        <option value="旗袍">旗袍</option>
+                        <option value="连体裤">连体裤</option>
+                        <option value="运动裤">运动裤</option>
+                        <option value="卫裤">卫裤</option>
+                        <option value="百褶裙">百褶裙</option>
+                    </select>
+                    <div class="invalid-feedback">请选择服装类别</div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="style" class="form-label">款式</label>
-                    <input type="text" class="form-control" id="style" name="style" required>
-                    <div class="invalid-feedback">请输入款式</div>
+                    <select class="form-select" id="style" name="style" required>
+                        <option value="">请选择款式</option>
+                        {% for letter in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' %}
+                        <option value="{{ letter }}">{{ letter }}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="invalid-feedback">请选择款式</div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="color" class="form-label">颜色</label>
-                    <input type="text" class="form-control" id="color" name="color" required>
-                    <div class="invalid-feedback">请输入颜色</div>
+                    <select class="form-select" id="color" name="color" required>
+                        <option value="">请选择颜色</option>
+                        <option value="红色">红色</option>
+                        <option value="粉红">粉红</option>
+                        <option value="橙色">橙色</option>
+                        <option value="黄色">黄色</option>
+                        <option value="米色">米色</option>
+                        <option value="杏色">杏色</option>
+                        <option value="卡其色">卡其色</option>
+                        <option value="绿色">绿色</option>
+                        <option value="墨绿">墨绿</option>
+                        <option value="青色">青色</option>
+                        <option value="天蓝">天蓝</option>
+                        <option value="宝蓝">宝蓝</option>
+                        <option value="深蓝">深蓝</option>
+                        <option value="藏青">藏青</option>
+                        <option value="紫色">紫色</option>
+                        <option value="浅紫">浅紫</option>
+                        <option value="咖啡色">咖啡色</option>
+                        <option value="驼色">驼色</option>
+                        <option value="棕色">棕色</option>
+                        <option value="白色">白色</option>
+                        <option value="米白">米白</option>
+                        <option value="乳白">乳白</option>
+                        <option value="灰色">灰色</option>
+                        <option value="深灰">深灰</option>
+                        <option value="银灰">银灰</option>
+                        <option value="黑色">黑色</option>
+                        <option value="彩色">彩色</option>
+                        <option value="花色">花色</option>
+                        <option value="条纹">条纹</option>
+                        <option value="格子">格子</option>
+                    </select>
+                    <div class="invalid-feedback">请选择颜色</div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="size" class="form-label">尺码</label>
-                    <input type="text" class="form-control" id="size" name="size" required>
-                    <div class="invalid-feedback">请输入尺码</div>
+                    <select class="form-select" id="size" name="size" required>
+                        <option value="">请选择尺码</option>
+                        <option value="XS">XS（特小码）</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                        <option value="XXXL">XXXL（特大码）</option>
+                    </select>
+                    <div class="invalid-feedback">请选择尺码</div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="material" class="form-label">材质</label>
-                    <input type="text" class="form-control" id="material" name="material" required>
-                    <div class="invalid-feedback">请输入材质</div>
+                    <select class="form-select" id="material" name="material" required>
+                        <option value="">请选择材质</option>
+                        <option value="纯棉">纯棉</option>
+                        <option value="棉质">棉质</option>
+                        <option value="牛仔布">牛仔布</option>
+                        <option value="涤纶">涤纶</option>
+                        <option value="雪纺">雪纺</option>
+                        <option value="亚麻">亚麻</option>
+                        <option value="羊毛">羊毛</option>
+                        <option value="丝绸">丝绸</option>
+                        <option value="尼龙">尼龙（锦纶）</option>
+                        <option value="氨纶">氨纶</option>
+                        <option value="腈纶">腈纶</option>
+                        <option value="棉涤混纺">棉涤混纺</option>
+                        <option value="皮革">皮革</option>
+                        <option value="麂皮">麂皮</option>
+                        <option value="灯芯绒">灯芯绒</option>
+                        <option value="毛呢">毛呢</option>
+                        <option value="真丝">真丝</option>
+                        <option value="莫代尔">莫代尔</option>
+                        <option value="莱卡">莱卡</option>
+                        <option value="天鹅绒">天鹅绒</option>
+                        <option value="帆布">帆布</option>
+                        <option value="牛津布">牛津布</option>
+                    </select>
+                    <div class="invalid-feedback">请选择材质</div>
                 </div>
             </div>
             <div class="row">

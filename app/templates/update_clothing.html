@@ -33,41 +33,145 @@
         <form method="POST" class="mt-4" id="updateClothingForm" onsubmit="return validateUpdateClothingForm()">
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label for="category" class="form-label">服装类别</label>
-                    <input type="text" class="form-control" id="category" name="category" value="{{ clothing.category }}" required>
-                    <div class="invalid-feedback">请输入服装类别</div>
+                    <label for="clothing_id" class="form-label">服装编号</label>
+                    <input type="text" class="form-control" id="clothing_id" name="clothing_id" value="{{ clothing.id }}" readonly>
                 </div>
+                <div class="col-md-6 mb-3">
+                    <label for="category" class="form-label">服装类别</label>
+                    <select class="form-select" id="category" name="category" required>
+                        <option value="">请选择类别</option>
+                        <option value="夹克" {% if clothing.category == '夹克' %}selected{% endif %}>夹克</option>
+                        <option value="风衣" {% if clothing.category == '风衣' %}selected{% endif %}>风衣</option>
+                        <option value="T恤" {% if clothing.category == 'T恤' %}selected{% endif %}>T恤</option>
+                        <option value="连衣裙" {% if clothing.category == '连衣裙' %}selected{% endif %}>连衣裙</option>
+                        <option value="衬衫" {% if clothing.category == '衬衫' %}selected{% endif %}>衬衫</option>
+                        <option value="休闲裤" {% if clothing.category == '休闲裤' %}selected{% endif %}>休闲裤</option>
+                        <option value="羽绒服" {% if clothing.category == '羽绒服' %}selected{% endif %}>羽绒服</option>
+                        <option value="卫衣" {% if clothing.category == '卫衣' %}selected{% endif %}>卫衣</option>
+                        <option value="毛衣" {% if clothing.category == '毛衣' %}selected{% endif %}>毛衣</option>
+                        <option value="牛仔裤" {% if clothing.category == '牛仔裤' %}selected{% endif %}>牛仔裤</option>
+                        <option value="阔腿裤" {% if clothing.category == '阔腿裤' %}selected{% endif %}>阔腿裤</option>
+                        <option value="直筒裤" {% if clothing.category == '直筒裤' %}selected{% endif %}>直筒裤</option>
+                        <option value="马甲" {% if clothing.category == '马甲' %}selected{% endif %}>马甲</option>
+                        <option value="西装" {% if clothing.category == '西装' %}selected{% endif %}>西装</option>
+                        <option value="运动衫" {% if clothing.category == '运动衫' %}selected{% endif %}>运动衫</option>
+                        <option value="半身裙" {% if clothing.category == '半身裙' %}selected{% endif %}>半身裙</option>
+                        <option value="A字裙" {% if clothing.category == 'A字裙' %}selected{% endif %}>A字裙</option>
+                        <option value="牛仔外套" {% if clothing.category == '牛仔外套' %}selected{% endif %}>牛仔外套</option>
+                        <option value="棉服" {% if clothing.category == '棉服' %}selected{% endif %}>棉服</option>
+                        <option value="背心" {% if clothing.category == '背心' %}selected{% endif %}>背心</option>
+                        <option value="吊带" {% if clothing.category == '吊带' %}selected{% endif %}>吊带</option>
+                        <option value="短裤" {% if clothing.category == '短裤' %}selected{% endif %}>短裤</option>
+                        <option value="背带裤" {% if clothing.category == '背带裤' %}selected{% endif %}>背带裤</option>
+                        <option value="旗袍" {% if clothing.category == '旗袍' %}selected{% endif %}>旗袍</option>
+                        <option value="连体裤" {% if clothing.category == '连体裤' %}selected{% endif %}>连体裤</option>
+                        <option value="运动裤" {% if clothing.category == '运动裤' %}selected{% endif %}>运动裤</option>
+                        <option value="卫裤" {% if clothing.category == '卫裤' %}selected{% endif %}>卫裤</option>
+                        <option value="百褶裙" {% if clothing.category == '百褶裙' %}selected{% endif %}>百褶裙</option>
+                    </select>
+                    <div class="invalid-feedback">请选择服装类别</div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="style" class="form-label">款式</label>
-                    <input type="text" class="form-control" id="style" name="style" value="{{ clothing.style }}" required>
-                    <div class="invalid-feedback">请输入款式</div>
+                    <select class="form-select" id="style" name="style" required>
+                        <option value="">请选择款式</option>
+                        {% for letter in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' %}
+                        <option value="{{ letter }}" {% if clothing.style == letter %}selected{% endif %}>{{ letter }}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="invalid-feedback">请选择款式</div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="color" class="form-label">颜色</label>
-                    <input type="text" class="form-control" id="color" name="color" value="{{ clothing.color }}" required>
-                    <div class="invalid-feedback">请输入颜色</div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="size" class="form-label">尺码</label>
-                    <input type="text" class="form-control" id="size" name="size" value="{{ clothing.size }}" required>
-                    <div class="invalid-feedback">请输入尺码</div>
+                    <select class="form-select" id="color" name="color" required>
+                        <option value="">请选择颜色</option>
+                        <option value="红色" {% if clothing.color == '红色' %}selected{% endif %}>红色</option>
+                        <option value="粉红" {% if clothing.color == '粉红' %}selected{% endif %}>粉红</option>
+                        <option value="橙色" {% if clothing.color == '橙色' %}selected{% endif %}>橙色</option>
+                        <option value="黄色" {% if clothing.color == '黄色' %}selected{% endif %}>黄色</option>
+                        <option value="米色" {% if clothing.color == '米色' %}selected{% endif %}>米色</option>
+                        <option value="杏色" {% if clothing.color == '杏色' %}selected{% endif %}>杏色</option>
+                        <option value="卡其色" {% if clothing.color == '卡其色' %}selected{% endif %}>卡其色</option>
+                        <option value="绿色" {% if clothing.color == '绿色' %}selected{% endif %}>绿色</option>
+                        <option value="墨绿" {% if clothing.color == '墨绿' %}selected{% endif %}>墨绿</option>
+                        <option value="青色" {% if clothing.color == '青色' %}selected{% endif %}>青色</option>
+                        <option value="天蓝" {% if clothing.color == '天蓝' %}selected{% endif %}>天蓝</option>
+                        <option value="宝蓝" {% if clothing.color == '宝蓝' %}selected{% endif %}>宝蓝</option>
+                        <option value="深蓝" {% if clothing.color == '深蓝' %}selected{% endif %}>深蓝</option>
+                        <option value="藏青" {% if clothing.color == '藏青' %}selected{% endif %}>藏青</option>
+                        <option value="紫色" {% if clothing.color == '紫色' %}selected{% endif %}>紫色</option>
+                        <option value="浅紫" {% if clothing.color == '浅紫' %}selected{% endif %}>浅紫</option>
+                        <option value="咖啡色" {% if clothing.color == '咖啡色' %}selected{% endif %}>咖啡色</option>
+                        <option value="驼色" {% if clothing.color == '驼色' %}selected{% endif %}>驼色</option>
+                        <option value="棕色" {% if clothing.color == '棕色' %}selected{% endif %}>棕色</option>
+                        <option value="白色" {% if clothing.color == '白色' %}selected{% endif %}>白色</option>
+                        <option value="米白" {% if clothing.color == '米白' %}selected{% endif %}>米白</option>
+                        <option value="乳白" {% if clothing.color == '乳白' %}selected{% endif %}>乳白</option>
+                        <option value="灰色" {% if clothing.color == '灰色' %}selected{% endif %}>灰色</option>
+                        <option value="深灰" {% if clothing.color == '深灰' %}selected{% endif %}>深灰</option>
+                        <option value="银灰" {% if clothing.color == '银灰' %}selected{% endif %}>银灰</option>
+                        <option value="黑色" {% if clothing.color == '黑色' %}selected{% endif %}>黑色</option>
+                        <option value="彩色" {% if clothing.color == '彩色' %}selected{% endif %}>彩色</option>
+                        <option value="花色" {% if clothing.color == '花色' %}selected{% endif %}>花色</option>
+                        <option value="条纹" {% if clothing.color == '条纹' %}selected{% endif %}>条纹</option>
+                        <option value="格子" {% if clothing.color == '格子' %}selected{% endif %}>格子</option>
+                    </select>
+                    <div class="invalid-feedback">请选择颜色</div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label for="material" class="form-label">材质</label>
-                    <input type="text" class="form-control" id="material" name="material" value="{{ clothing.material }}" required>
-                    <div class="invalid-feedback">请输入材质</div>
+                    <label for="size" class="form-label">尺码</label>
+                    <select class="form-select" id="size" name="size" required>
+                        <option value="">请选择尺码</option>
+                        <option value="XS" {% if clothing.size == 'XS' %}selected{% endif %}>XS（特小码）</option>
+                        <option value="S" {% if clothing.size == 'S' %}selected{% endif %}>S</option>
+                        <option value="M" {% if clothing.size == 'M' %}selected{% endif %}>M</option>
+                        <option value="L" {% if clothing.size == 'L' %}selected{% endif %}>L</option>
+                        <option value="XL" {% if clothing.size == 'XL' %}selected{% endif %}>XL</option>
+                        <option value="XXL" {% if clothing.size == 'XXL' %}selected{% endif %}>XXL</option>
+                        <option value="XXXL" {% if clothing.size == 'XXXL' %}selected{% endif %}>XXXL（特大码）</option>
+                    </select>
+                    <div class="invalid-feedback">请选择尺码</div>
                 </div>
+                <div class="col-md-6 mb-3">
+                    <label for="material" class="form-label">材质</label>
+                    <select class="form-select" id="material" name="material" required>
+                        <option value="">请选择材质</option>
+                        <option value="纯棉" {% if clothing.material == '纯棉' %}selected{% endif %}>纯棉</option>
+                        <option value="棉质" {% if clothing.material == '棉质' %}selected{% endif %}>棉质</option>
+                        <option value="牛仔布" {% if clothing.material == '牛仔布' %}selected{% endif %}>牛仔布</option>
+                        <option value="涤纶" {% if clothing.material == '涤纶' %}selected{% endif %}>涤纶</option>
+                        <option value="雪纺" {% if clothing.material == '雪纺' %}selected{% endif %}>雪纺</option>
+                        <option value="亚麻" {% if clothing.material == '亚麻' %}selected{% endif %}>亚麻</option>
+                        <option value="羊毛" {% if clothing.material == '羊毛' %}selected{% endif %}>羊毛</option>
+                        <option value="丝绸" {% if clothing.material == '丝绸' %}selected{% endif %}>丝绸</option>
+                        <option value="尼龙" {% if clothing.material == '尼龙' %}selected{% endif %}>尼龙（锦纶）</option>
+                        <option value="氨纶" {% if clothing.material == '氨纶' %}selected{% endif %}>氨纶</option>
+                        <option value="腈纶" {% if clothing.material == '腈纶' %}selected{% endif %}>腈纶</option>
+                        <option value="棉涤混纺" {% if clothing.material == '棉涤混纺' %}selected{% endif %}>棉涤混纺</option>
+                        <option value="皮革" {% if clothing.material == '皮革' %}selected{% endif %}>皮革</option>
+                        <option value="麂皮" {% if clothing.material == '麂皮' %}selected{% endif %}>麂皮</option>
+                        <option value="灯芯绒" {% if clothing.material == '灯芯绒' %}selected{% endif %}>灯芯绒</option>
+                        <option value="毛呢" {% if clothing.material == '毛呢' %}selected{% endif %}>毛呢</option>
+                        <option value="真丝" {% if clothing.material == '真丝' %}selected{% endif %}>真丝</option>
+                        <option value="莫代尔" {% if clothing.material == '莫代尔' %}selected{% endif %}>莫代尔</option>
+                        <option value="莱卡" {% if clothing.material == '莱卡' %}selected{% endif %}>莱卡</option>
+                        <option value="天鹅绒" {% if clothing.material == '天鹅绒' %}selected{% endif %}>天鹅绒</option>
+                        <option value="帆布" {% if clothing.material == '帆布' %}selected{% endif %}>帆布</option>
+                        <option value="牛津布" {% if clothing.material == '牛津布' %}selected{% endif %}>牛津布</option>
+                    </select>
+                    <div class="invalid-feedback">请选择材质</div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="cost_price" class="form-label">成本价</label>
                     <input type="number" step="0.01" class="form-control" id="cost_price" name="cost_price" value="{{ clothing.cost_price }}" required>
                     <div class="invalid-feedback">请输入有效的成本价</div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="retail_price" class="form-label">零售价</label>
                     <input type="number" step="0.01" class="form-control" id="retail_price" name="retail_price" value="{{ clothing.retail_price }}" required>

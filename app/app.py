@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from models import db, Clothing, User
+from app.models import db, Clothing, User
 from functools import wraps
 
 app = Flask(__name__)
