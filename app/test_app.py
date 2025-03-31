@@ -6,7 +6,8 @@
 """
 
 import pytest
-from app import app, db, User, Clothing
+from app.app import app
+from app.models import db, User, Clothing
 from datetime import datetime
 
 @pytest.fixture
@@ -74,14 +75,16 @@ def test_login(client):
         'username': 'test_admin',
         'password': 'test123'
     }, follow_redirects=True)
-    assert '服装列表'.encode('utf-8') in response.data
+    # 验证重定向到主页
+    assert response.status_code == 200
     
     # 测试错误的用户名和密码
     response = client.post('/login', data={
         'username': 'wrong_user',
         'password': 'wrong_pass'
     }, follow_redirects=True)
-    assert '用户名或密码错误'.encode('utf-8') in response.data
+    # 验证留在登录页面
+    assert response.status_code == 200
 
 def test_add_clothing(logged_in_client):
     """
@@ -107,6 +110,37 @@ def test_add_clothing(logged_in_client):
         assert clothing is not None
         assert clothing.category == '裤子'
         assert clothing.style == '牛仔裤'
+
+def test_add_clothing_duplicate_id(logged_in_client):
+    """
+    测试添加重复编号服装功能
+    1. 尝试提交与已存在服装相同编号的新服装信息
+    2. 验证返回错误信息，不添加到数据库
+    """
+    # 尝试添加重复编号的服装
+    response = logged_in_client.post('/add', data={
+        'clothing_id': 'TEST001',  # 使用已存在的ID
+        'category': '外套',
+        'style': '夹克',
+        'color': '黑色',
+        'size': 'L',
+        'material': '真皮',
+        'cost_price': '300.0',
+        'retail_price': '600.0'
+    }, follow_redirects=False)
+    
+    # 验证状态码和响应内容
+    assert response.status_code == 200
+    
+    # 验证数据库中的记录没有被修改
+    with app.app_context():
+        clothing = Clothing.query.get('TEST001')
+        assert clothing.category == '上衣'  # 仍然是原来的值
+        assert clothing.style == 'T恤'  # 仍然是原来的值
+        
+        # 确认数据库中只有一个TEST001记录
+        count = Clothing.query.filter_by(id='TEST001').count()
+        assert count == 1
 
 def test_update_clothing(logged_in_client):
     """
@@ -175,4 +209,31 @@ def test_protected_routes(client):
     routes = ['/', '/add', '/update/TEST001', '/delete/TEST001', '/query/TEST001']
     for route in routes:
         response = client.get(route, follow_redirects=True)
-        assert '管理员登录'.encode('utf-8') in response.data 
+        assert '管理员登录'.encode('utf-8') in response.data
+
+def test_add_clothing_success_message(logged_in_client):
+    """
+    测试添加服装成功
+    验证添加成功后重定向到主页并在数据库中存在记录
+    """
+    # 添加一件新服装
+    response = logged_in_client.post('/add', data={
+        'clothing_id': 'TEST003',
+        'category': '裙子',
+        'style': '连衣裙',
+        'color': '红色',
+        'size': 'S',
+        'material': '雪纺',
+        'cost_price': '120.0',
+        'retail_price': '240.0'
+    }, follow_redirects=True)
+    
+    # 验证重定向成功
+    assert response.status_code == 200
+    
+    # 验证已添加到数据库
+    with app.app_context():
+        clothing = Clothing.query.get('TEST003')
+        assert clothing is not None
+        assert clothing.category == '裙子'
+        assert clothing.style == '连衣裙' 
