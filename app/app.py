@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from app.models import db, Clothing, User
+from models import db, Clothing, User
 from functools import wraps
 
 app = Flask(__name__)
@@ -32,6 +32,10 @@ def login_required(f):
 # 登录路由
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    # 如果用户已登录，直接重定向到主页
+    if 'user_id' in session:
+        return redirect(url_for('index'))
+        
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
@@ -63,8 +67,23 @@ def index():
 @app.route('/add', methods=['GET', 'POST'])
 @login_required
 def add_clothing():
+    error_message = None
     if request.method == 'POST':
         clothing_id = request.form.get('clothing_id')
+        
+        # 检查编号是否已存在
+        existing_clothing = Clothing.query.get(clothing_id)
+        if existing_clothing:
+            error_message = '服装编号已存在，请使用其他编号'
+            return render_template('add_clothing.html', error_message=error_message, 
+                                category=request.form.get('category'),
+                                style=request.form.get('style'),
+                                color=request.form.get('color'),
+                                size=request.form.get('size'),
+                                material=request.form.get('material'),
+                                cost_price=request.form.get('cost_price'),
+                                retail_price=request.form.get('retail_price'))
+            
         category = request.form.get('category')
         style = request.form.get('style')
         color = request.form.get('color')
@@ -85,8 +104,9 @@ def add_clothing():
         )
         db.session.add(new_clothing)
         db.session.commit()
+        flash('服装添加成功')
         return redirect(url_for('index'))
-    return render_template('add_clothing.html')
+    return render_template('add_clothing.html', error_message=error_message)
 
 # 服装出库（已售出删除）
 @app.route('/delete/<string:clothing_id>')
