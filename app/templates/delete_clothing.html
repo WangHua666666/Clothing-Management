@@ -1,31 +1,46 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
+    <!-- 页面元信息 -->
     <meta charset="UTF-8">
+    <!-- 响应式视口设置 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 页面标题 -->
     <title>服装出库 - 服装库存管理系统</title>
+    <!-- 引入自定义CSS样式文件 -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <!-- 主内容容器 -->
     <div class="container">
+        <!-- 页面标题 -->
         <h1>服装出库</h1>
+        <!-- 服装出库表单 - 使用POST方法提交数据 -->
         <form method="POST" class="form">
+            <!-- 服装选择表单组 -->
             <div class="form-group">
                 <label for="clothing_id">选择服装：</label>
+                <!-- 服装选择下拉框 - 通过JavaScript动态填充选项 -->
                 <select id="clothing_id" name="clothing_id" required>
                     <!-- 这里将通过JavaScript动态填充服装列表 -->
                 </select>
             </div>
+            <!-- 出库数量表单组 -->
             <div class="form-group">
                 <label for="quantity">出库数量：</label>
+                <!-- 数量输入框 - 限制最小值为1 -->
                 <input type="number" id="quantity" name="quantity" min="1" required>
             </div>
+            <!-- 表单按钮组 -->
             <div class="form-group">
+                <!-- 提交按钮 - 确认出库 -->
                 <button type="submit" class="button">出库</button>
+                <!-- 返回链接 - 取消出库操作 -->
                 <a href="{{ url_for('index') }}" class="button">返回</a>
             </div>
         </form>
     </div>
+    <!-- 引入自定义JavaScript文件 - 负责动态加载服装数据 -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html> 
